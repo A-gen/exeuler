@@ -1,3 +1,3 @@
 defmodule ExEulerTest do
-  use ExEuler.EulerCase
+  use ExEuler.EulerCase, async: true
 end

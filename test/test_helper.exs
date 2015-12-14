@@ -1,1 +1,1 @@
-ExUnit.start(timeout: 600)
+ExUnit.start(timeout: 6000)
