@@ -14,8 +14,8 @@ defmodule ExEuler.Problems.Problem0004 do
   """
 
   def run(digits) do
-    s = trunc :math.pow(10, digits - 1)
-    e = trunc :math.pow(10, digits - 1) * 10 - 1
+    s = String.ljust("9", digits, ?0) |> String.to_integer
+    e = String.ljust("9", digits, ?9) |> String.to_integer
     for x <- s..e,
         y <- s..e,
         Integer.to_string(x * y) == String.reverse(Integer.to_string(x * y))
