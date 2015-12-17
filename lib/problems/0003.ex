@@ -14,6 +14,6 @@ defmodule ExEuler.Problems.Problem0003 do
   """
 
   def run(number) do
-    ExEuler.Math.prime_factors(number) |> Enum.max
+    ExEuler.Math.prime_factors(number) |> Enum.map(&(Enum.at(&1, 0))) |> Enum.max
   end
 end

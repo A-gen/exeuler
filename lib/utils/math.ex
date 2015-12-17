@@ -5,18 +5,33 @@ defmodule ExEuler.Math do
     [2]
     |> Stream.concat(
       Stream.iterate(3, &(&1 + 2))
-      |> Stream.unfold(fn s ->
-        p = Enum.at(s, 0)
-        next = Stream.reject(s, &(rem(&1, p) == 0))
+      |> Stream.unfold(fn seq ->
+        p = Enum.at(seq, 0)
+        next = Stream.reject(seq, &(rem(&1, p) == 0))
         {p, next}
       end)
     )
   end
-  def primes(max), do: primes |> Stream.take_while(&(&1 <= max))
 
-  def prime_factors(number), do: _prime_factors(number, Enum.to_list(2..(trunc :math.sqrt(number))), [])
+  def prime_factors(number) when number < 1, do: nil
+  def prime_factors(number) when number < 4, do: [[number, 1]]
+  def prime_factors(number) do
+    elements = Enum.to_list(2..(trunc :math.sqrt(number)))
+    _prime_factors(number, elements, [])
+    |> Stream.unfold(fn
+      [] -> nil
+      seq ->
+        first = Enum.at(seq, 0)
+        count = Enum.count(seq, &(first == &1))
+        next = Enum.reject(seq, &(first == &1))
+        {[first, count], next}
+    end)
+    |> Enum.to_list
+  end
 
-  def _prime_factors(number, [], factors), do: factors
-  def _prime_factors(number, primes = [p | _], factors) when rem(number, p) == 0, do: _prime_factors((trunc number / p), primes, factors ++ [p])
-  def _prime_factors(number, [p | t], factors), do: _prime_factors(number, t, factors)
+  defp _prime_factors(number, [], factors) when number == 0, do: factors
+  defp _prime_factors(number, [], factors) when number != 1, do: factors ++ [number]
+  defp _prime_factors(number, [], factors), do: factors
+  defp _prime_factors(number, primes = [p | _], factors) when rem(number, p) == 0, do: _prime_factors((trunc number / p), primes, factors ++ [p])
+  defp _prime_factors(number, [p | t], factors), do: _prime_factors(number, t, factors)
 end
