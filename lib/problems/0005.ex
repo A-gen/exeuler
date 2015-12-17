@@ -13,13 +13,19 @@ defmodule ExEuler.Problems.Problem0005 do
   232792560
   """
 
-  def run(s..e = range) do
-    target = s..e |> Enum.reject(&(&1 == 1))
-    Stream.iterate(e, &(&1 + e))
-    |> Stream.filter(fn x ->
-      Enum.all?(target, fn y -> rem(x, y) == 0 end)
+  def run(range) do
+    #target = s..e |> Enum.reject(&(&1 == 1))
+    #Stream.iterate(e, &(&1 + e))
+    #|> Stream.filter(fn x -> Enum.all?(target, fn y -> rem(x, y) == 0 end) end)
+    #|> Enum.take(1)
+    #|> Enum.at(0)
+
+    range
+    |> Enum.map(&ExEuler.Math.prime_factors/1) # prime factors
+    |> Enum.reduce([], fn factors, acc -> acc ++ factors end) # flatten
+    |> Enum.group_by(fn [a, _] -> a end)
+    |> Enum.reduce(1, fn ({key_, factors}, acc) ->
+      acc * (factors |> Enum.map(fn [a, b] -> trunc :math.pow(a, b) end) |> Enum.max)
     end)
-    |> Enum.take(1)
-    |> Enum.at(0)
   end
 end
