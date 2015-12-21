@@ -24,4 +24,30 @@ defmodule ExEuler.MathTest do
       assert expect == ExEuler.Math.Prime.prime_factors(num)
     end)
   end
+
+  test "returns triangular numbers" do
+    assert [1, 3, 6, 10, 15, 21] == ExEuler.Math.triangular_numbers |> Enum.take(6)
+  end
+
+  test "returns divisors" do
+    [
+      { 1, [1]},
+      { 2, [1, 2]},
+      {10, [1, 2, 5, 10]},
+    ]
+    |> Enum.each(fn {num, expect} ->
+      assert expect == ExEuler.Math.divisors(num)
+    end)
+  end
+
+  test "returns divisors' count" do
+    [
+      { 1, 1},
+      { 2, 2},
+      {10, 4},
+    ]
+    |> Enum.each(fn {num, expect} ->
+      assert expect == ExEuler.Math.divisors_count(num)
+    end)
+  end
 end
