@@ -1,6 +1,15 @@
 defmodule ExEuler.Math.Prime do
   def sieve(n) when n < 2, do: []
-  def sieve(n), do: 2..n |> ExEuler.List.to_list |> _sieve(n, [])
+  def sieve(2), do: [2]
+  def sieve(n) do
+    [2]
+    |> Enum.concat(
+      3..n
+      |> Enum.take_every(2)
+      |> _sieve(n, [])
+    )
+    #2..n |> ExEuler.List.to_list |> _sieve(n, [])
+  end
   defp _sieve([], _n, prs), do: prs
   defp _sieve([h | t], n, prs) do
     cond do

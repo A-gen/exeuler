@@ -14,7 +14,7 @@ defmodule ExEuler.Problems.Problem0007 do
   """
 
   def run(n) do
-    max = n * (:math.log(n) + :math.log(:math.log(n)))
+    max = trunc (n * (:math.log(n) + :math.log(:math.log(n))))
     ExEuler.Math.Prime.sieve(max) |> Enum.at(n - 1)
   end
 end
