@@ -21,7 +21,7 @@ defmodule ExEuler.Problems.Problem0005 do
     #|> Enum.at(0)
 
     range
-    |> Enum.map(&ExEuler.Math.prime_factors/1) # prime factors
+    |> Enum.map(&ExEuler.Math.Prime.prime_factors/1) # prime factors
     |> Enum.reduce([], fn factors, acc -> acc ++ factors end) # flatten
     |> Enum.group_by(fn [a, _] -> a end)
     |> Enum.reduce(1, fn ({key_, factors}, acc) ->

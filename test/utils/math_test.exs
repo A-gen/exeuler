@@ -6,8 +6,8 @@ defmodule ExEuler.MathTest do
     assert [1, 2, 3, 5, 8, 13, 21, 34, 55, 89] == ExEuler.Math.fibs({1, 2}) |> Enum.take(10)
   end
 
-  test "return primes" do
-    assert [2, 3, 5, 7, 11] == ExEuler.Math.primes |> Enum.take(5)
+  test "return primes by Sieve of Eratosthenes" do
+    assert [2, 3, 5, 7] == ExEuler.Math.Prime.sieve(10)
   end
 
   test "returns prime factors" do
@@ -21,7 +21,7 @@ defmodule ExEuler.MathTest do
       {360, [[2, 3], [3, 2], [5, 1]]},
     ]
     |> Enum.each(fn {num, expect} ->
-      assert expect == ExEuler.Math.prime_factors(num)
+      assert expect == ExEuler.Math.Prime.prime_factors(num)
     end)
   end
 end
