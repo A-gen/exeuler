@@ -13,4 +13,8 @@ defmodule ExEuler.Math do
 
   def divisors_count(1), do: 1
   def divisors_count(number), do: ExEuler.Math.Prime.prime_factors(number) |> Enum.reduce(1, fn [_, count], acc -> acc * (count + 1) end)
+
+  def fact(0), do: 1
+  def fact(1), do: 1
+  def fact(n), do: 2..n |> Enum.reduce(&*/2)
 end
