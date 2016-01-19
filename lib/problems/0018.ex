@@ -1,4 +1,4 @@
-defmodule ExEuler.Problems.Problem0018 do
+defmodule ExEuler.Problems.P0018 do
   @moduledoc """
   # Maximum path sum I
   By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
@@ -27,7 +27,7 @@ defmodule ExEuler.Problems.Problem0018 do
   NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 
   ## Answer
-  iex> ExEuler.Problems.Problem0018.run
+  iex> ExEuler.Problems.P0018.solve
   1074
   """
 
@@ -49,19 +49,19 @@ defmodule ExEuler.Problems.Problem0018 do
     ["04", "62", "98", "27", "23", "09", "70", "98", "73", "93", "38", "53", "60", "04", "23"],
   ]
 
-  def run do
+  def solve(_ \\ :dummy) do
     @pyramid
     |> Enum.map(fn line -> line |> Enum.map(&String.to_integer/1) end)
     |> Enum.reverse
-    |> solve
+    |> _solve
   end
 
-  defp solve([[answer]]), do: answer
-  defp solve([previous | [target | tail]]) do
+  defp _solve([[answer]]), do: answer
+  defp _solve([previous | [target | tail]]) do
     biggers = previous |> to_pairs |> pick_biggers
     [Enum.zip(biggers, target) |> Enum.map(&sum/1)]
     |> Enum.concat(tail)
-    |> solve
+    |> _solve
   end
 
   defp to_pairs(arr), do: to_pairs(arr, [])

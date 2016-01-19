@@ -1,4 +1,4 @@
-defmodule ExEuler.Problems.Problem0014 do
+defmodule ExEuler.Problems.P0014 do
   @moduledoc """
   # Longest Collatz sequence
   The following iterative sequence is defined for the set of positive integers:
@@ -12,16 +12,17 @@ defmodule ExEuler.Problems.Problem0014 do
   NOTE: Once the chain starts the terms are allowed to go above one million.
 
   ## Answer
-  iex> ExEuler.Problems.Problem0014.run(1_000_000)
-  {837799, 525}
+  iex> ExEuler.Problems.P0014.solve
+  837799
   """
 
-  def run(n) do
+  def solve(n \\ 1_000_000) do
     Stream.iterate(n - (1 - rem(n, 2)), &(&1 - 2))
     |> Stream.take_while(&(&1 > (trunc n / 3)))
     |> Stream.map(&({&1, collatz(&1)}))
-    |> Enum.sort_by(fn {x, len} -> len end, &>=/2)
+    |> Enum.sort_by(fn {_x, len} -> len end, &>=/2)
     |> List.first
+    |> elem(0)
   end
 
   defp collatz(n), do: collatz(n, 1)

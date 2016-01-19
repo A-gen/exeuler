@@ -1,4 +1,4 @@
-defmodule ExEuler.Problems.Problem0006 do
+defmodule ExEuler.Problems.P0006 do
   @moduledoc """
   # Sum square difference
   The sum of the squares of the first ten natural numbers is,
@@ -9,15 +9,15 @@ defmodule ExEuler.Problems.Problem0006 do
   Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 
   ## Example 1
-  iex> ExEuler.Problems.Problem0006.run(10)
+  iex> ExEuler.Problems.P0006.solve(10)
   2640
 
   ## Answer
-  iex> ExEuler.Problems.Problem0006.run(100)
+  iex> ExEuler.Problems.P0006.solve
   25164150
   """
 
-  def run(num) do
+  def solve(num \\ 100) do
     sum = 1..num |> Enum.reduce(0, fn x, acc -> acc + x * x end)
     pow = trunc 1..num |> Enum.reduce(0, &+/2) |> :math.pow(2)
     pow - sum

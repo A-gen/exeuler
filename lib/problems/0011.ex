@@ -1,4 +1,4 @@
-defmodule ExEuler.Problems.Problem0011 do
+defmodule ExEuler.Problems.P0011 do
   @moduledoc """
   # Largest product in a grid
   In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
@@ -28,7 +28,7 @@ defmodule ExEuler.Problems.Problem0011 do
   What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
   ## Answer
-  iex> ExEuler.Problems.Problem0011.run(4)
+  iex> ExEuler.Problems.P0011.solve
   70600674
   """
 
@@ -55,7 +55,7 @@ defmodule ExEuler.Problems.Problem0011 do
   01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
   """
 
-  def run(len) do
+  def solve(len \\ 4) do
     grid = @grid |> String.split("\n", trim: true) |> Enum.map(fn l -> String.split(l) |> Enum.map(&String.to_integer/1) end)
     ans = for i <- 0..(20 - len), j <- 0..(20 - len), do: grid |> split(len, {i, j}) |> calc
     ans |> List.flatten |> Enum.max

@@ -1,4 +1,4 @@
-defmodule ExEuler.Problems.Problem0009 do
+defmodule ExEuler.Problems.P0009 do
   @moduledoc """
   # Special Pythagorean triplet
   A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
@@ -9,16 +9,16 @@ defmodule ExEuler.Problems.Problem0009 do
   Find the product abc.
 
   ## Answer
-  iex> ExEuler.Problems.Problem0009.run(1000)
+  iex> ExEuler.Problems.P0009.solve
   31875000
   """
 
-  def run(n) do
+  def solve(n \\ 1000) do
     for a <- 1..(n - 2),
         b <- a..(n - 1 - a),
         c = n - a - b,
         a * a + b * b == c * c,
-        a + b + c == 1000 do
+        a + b + c == n do
           a * b * c
         end
     |> Enum.at(0)

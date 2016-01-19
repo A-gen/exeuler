@@ -1,4 +1,4 @@
-defmodule ExEuler.Problems.Problem0013 do
+defmodule ExEuler.Problems.P0013 do
   @moduledoc """
   # Large sum
   Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
@@ -105,7 +105,7 @@ defmodule ExEuler.Problems.Problem0013 do
     53503534226472524250874054075591789781264330331690
 
   ## Answer
-  iex> ExEuler.Problems.Problem0013.run(10)
+  iex> ExEuler.Problems.P0013.solve
   5537376230
   """
 
@@ -212,7 +212,7 @@ defmodule ExEuler.Problems.Problem0013 do
   53503534226472524250874054075591789781264330331690
   """
 
-  def run(length) do
+  def solve(length \\ 10) do
     @numbers
     |> String.split("\n", trim: true)
     |> Enum.map(&String.to_integer/1)
