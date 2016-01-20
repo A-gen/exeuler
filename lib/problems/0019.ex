@@ -20,7 +20,7 @@ defmodule ExEuler.Problems.P0019 do
   """
 
   def solve(to \\ 2000) do
-    for year <- 1901..to, month <- 1..12, do: zeller(year, month, 1)
+    (for year <- 1901..to, month <- 1..12, do: zeller(year, month, 1))
     |> Enum.filter(&(&1 == 0))
     |> Enum.count
   end
